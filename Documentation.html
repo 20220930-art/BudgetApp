@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BudgetApp - User Guide</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; color: #333; line-height: 1.6; }
+    h1 { color: #1a73e8; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; }
+    h2 { color: #333; margin-top: 40px; border-left: 4px solid #1a73e8; padding-left: 12px; }
+    h3 { color: #555; }
+    .step { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px 20px; margin: 15px 0; }
+    .step-number { display: inline-block; background: #1a73e8; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; margin-right: 10px; }
+    .tip { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 15px 0; border-radius: 4px; }
+    .warning { background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px 16px; margin: 15px 0; border-radius: 4px; }
+    code { background: #f1f1f1; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    th, td { border: 1px solid #dee2e6; padding: 10px 14px; text-align: left; }
+    th { background: #1a73e8; color: white; }
+    tr:nth-child(even) { background: #f8f9fa; }
+    .toc { background: #f8f9fa; padding: 20px 30px; border-radius: 8px; margin: 20px 0; }
+    .toc a { color: #1a73e8; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .toc li { margin: 6px 0; }
+  </style>
+</head>
+<body>
+
+  <h1>BudgetApp - User Guide</h1>
+  <p><strong>Personal Budget Management Software</strong></p>
+  <p>Course: CS251 - Intro to Software Engineering | Student: Alaa Eldin Abdullah Hassan Ali | ID: 20220930 | Section: S12 | TA: Basma Mukhtar Hussain</p>
+
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#setup">Setup and Installation</a></li>
+      <li><a href="#signup">Creating an Account</a></li>
+      <li><a href="#login">Logging In</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#transactions">Managing Transactions</a></li>
+      <li><a href="#budgets">Creating and Tracking Budgets</a></li>
+      <li><a href="#alerts">Budget Alerts</a></li>
+      <li><a href="#goals">Savings Goals</a></li>
+      <li><a href="#reports">Reports and Analytics</a></li>
+      <li><a href="#notifications">Notifications</a></li>
+      <li><a href="#tech">Technology Stack</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. SETUP -->
+  <h2 id="setup">1. Setup and Installation</h2>
+
+  <h3>Prerequisites</h3>
+  <ul>
+    <li>Node.js (v18 or higher)</li>
+    <li>PostgreSQL (v15 or higher)</li>
+    <li>npm (comes with Node.js)</li>
+  </ul>
+
+  <h3>Steps</h3>
+  <div class="step">
+    <span class="step-number">1</span> Create a PostgreSQL database named <code>budgetapp</code>
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Open the <code>.env</code> file and update the database connection string:
+    <br><code>DATABASE_URL=postgresql://username:password@localhost:5432/budgetapp</code>
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Open a terminal in the project folder and run:
+    <br><code>npm install</code>
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Start the server:
+    <br><code>npm start</code>
+  </div>
+  <div class="step">
+    <span class="step-number">5</span> Open your browser and go to <code>http://localhost:3000</code>
+  </div>
+
+  <div class="tip">
+    The database tables are created automatically when the server starts for the first time. Default categories (Salary, Freelance, Food, Transport, Shopping, Bills, Entertainment, Health, Other) are added when you register.
+  </div>
+
+  <!-- 2. SIGNUP -->
+  <h2 id="signup">2. Creating an Account</h2>
+  <div class="step">
+    <span class="step-number">1</span> Open the app in your browser. You will see the login page.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"Don't have an account? Sign up"</strong> at the bottom.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Enter your name, email, and a password.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Sign Up"</strong>. You will be redirected to the Dashboard automatically.
+  </div>
+
+  <!-- 3. LOGIN -->
+  <h2 id="login">3. Logging In</h2>
+  <div class="step">
+    <span class="step-number">1</span> Enter your email and password on the login page.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"Login"</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> If the credentials are correct, you will be taken to the Dashboard.
+  </div>
+  <div class="warning">
+    If you enter a wrong email or password, a red error message will appear below the form.
+  </div>
+
+  <!-- 4. DASHBOARD -->
+  <h2 id="dashboard">4. Dashboard</h2>
+  <p>The Dashboard is the main screen you see after logging in. It shows:</p>
+  <table>
+    <tr><th>Card</th><th>Description</th></tr>
+    <tr><td>Balance</td><td>Your total income minus total expenses</td></tr>
+    <tr><td>Income</td><td>Total money you earned</td></tr>
+    <tr><td>Expenses</td><td>Total money you spent</td></tr>
+    <tr><td>Active Budgets</td><td>Number of budgets currently being tracked</td></tr>
+    <tr><td>Active Goals</td><td>Number of savings goals in progress</td></tr>
+  </table>
+  <p>Below the cards, you can see your <strong>5 most recent transactions</strong>.</p>
+
+  <!-- 5. TRANSACTIONS -->
+  <h2 id="transactions">5. Managing Transactions</h2>
+
+  <h3>Adding a Transaction</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Transactions"</strong> in the navigation bar.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Click the <strong>"+ Add Transaction"</strong> button at the top.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Fill in the form:
+    <ul>
+      <li><strong>Type</strong>: Choose "Income" or "Expense"</li>
+      <li><strong>Category</strong>: Select a category (changes based on type)</li>
+      <li><strong>Amount</strong>: Enter the amount in EGP</li>
+      <li><strong>Date</strong>: Pick the date</li>
+      <li><strong>Description</strong>: Optional note about the transaction</li>
+    </ul>
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Save"</strong>.
+  </div>
+
+  <h3>Editing a Transaction</h3>
+  <div class="step">
+    <span class="step-number">1</span> Find the transaction in the table.</div>
+  <div class="step">
+    <span class="step-number">2</span> Click the <strong>"Edit"</strong> button next to it.</div>
+  <div class="step">
+    <span class="step-number">3</span> The form will appear pre-filled with the transaction data. Make your changes and click <strong>"Save"</strong>.</div>
+
+  <h3>Deleting a Transaction</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click the <strong>"Delete"</strong> button next to the transaction.</div>
+  <div class="step">
+    <span class="step-number">2</span> Confirm the deletion in the popup.</div>
+
+  <!-- 6. BUDGETS -->
+  <h2 id="budgets">6. Creating and Tracking Budgets</h2>
+
+  <h3>Creating a Budget</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Budgets"</strong> in the navigation bar.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"+ Create Budget"</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Fill in the form:
+    <ul>
+      <li><strong>Category</strong>: Which expense category to track</li>
+      <li><strong>Amount</strong>: Your monthly spending limit in EGP</li>
+      <li><strong>Month/Year</strong>: Which month this budget applies to</li>
+      <li><strong>Alert %</strong>: At what percentage you want to be warned (default 80%)</li>
+    </ul>
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Save"</strong>.
+  </div>
+
+  <h3>Budget Progress</h3>
+  <p>Each budget shows a progress bar:</p>
+  <ul>
+    <li><span style="color:green;font-weight:bold">Green</span> = spending is under control</li>
+    <li><span style="color:orange;font-weight:bold">Orange</span> = nearing your alert threshold</li>
+    <li><span style="color:red;font-weight:bold">Red</span> = you exceeded the budget</li>
+  </ul>
+
+  <!-- 7. ALERTS -->
+  <h2 id="alerts">7. Budget Alerts</h2>
+  <p>When you add an expense, the system automatically checks if you are close to or over your budget for that category:</p>
+  <table>
+    <tr><th>Status</th><th>What Happens</th></tr>
+    <tr><td>Under threshold</td><td>Nothing happens, progress bar stays green</td></tr>
+    <tr><td>Near limit (e.g. 80%+)</td><td>Orange warning notification is created</td></tr>
+    <tr><td>Exceeded</td><td>Red alert notification is created</td></tr>
+  </table>
+  <div class="tip">
+    You can see alerts in the Notifications page. The badge on "Notifications" in the navbar shows how many unread alerts you have.
+  </div>
+
+  <!-- 8. GOALS -->
+  <h2 id="goals">8. Savings Goals</h2>
+
+  <h3>Creating a Goal</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Goals"</strong> in the navigation bar.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"+ New Goal"</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Enter a name, target amount, and optional deadline.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Save"</strong>. The goal appears with a 0% progress bar.
+  </div>
+
+  <h3>Adding Money to a Goal</h3>
+  <div class="step">
+    <span class="step-number">1</span> Find the goal card.</div>
+  <div class="step">
+    <span class="step-number">2</span> Enter an amount in the small input field.</div>
+  <div class="step">
+    <span class="step-number">3</span> Click <strong>"Add Money"</strong>.</div>
+  <div class="step">
+    <span class="step-number">4</span> The progress bar updates. When you reach the target, a congratulations message appears and the goal is marked as completed.</div>
+
+  <!-- 9. REPORTS -->
+  <h2 id="reports">9. Reports and Analytics</h2>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Reports"</strong> in the navigation bar.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Optionally select a date range (From and To).
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Click <strong>"Generate"</strong>.
+  </div>
+  <p>The report shows:</p>
+  <ul>
+    <li><strong>Total Income / Total Expenses / Savings Rate</strong> - summary cards at the top</li>
+    <li><strong>Spending by Category</strong> - table showing how much you spent per category</li>
+    <li><strong>Monthly Trend</strong> - income and expenses broken down by month</li>
+    <li><strong>Top expense category</strong> - which category you spend the most on</li>
+  </ul>
+
+  <!-- 10. NOTIFICATIONS -->
+  <h2 id="notifications">10. Notifications</h2>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Notifications"</strong> in the navigation bar (shows a red badge with unread count).
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> You will see a list of all budget alerts with timestamps.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Click <strong>"Mark all as read"</strong> to clear the badge counter.
+  </div>
+
+  <!-- 11. TECH STACK -->
+  <h2 id="tech">11. Technology Stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Technology</th></tr>
+    <tr><td>Frontend</td><td>Alpine.js, Bootstrap 5, HTML5</td></tr>
+    <tr><td>Backend</td><td>Node.js, Express.js</td></tr>
+    <tr><td>Database</td><td>PostgreSQL (via pg library)</td></tr>
+    <tr><td>Authentication</td><td>JWT (JSON Web Tokens), bcryptjs</td></tr>
+  </table>
+
+  <h3>Project Structure</h3>
+  <table>
+    <tr><th>File/Folder</th><th>Purpose</th></tr>
+    <tr><td>server/index.js</td><td>Main server entry point</td></tr>
+    <tr><td>server/routes/</td><td>API route handlers (auth, transactions, budgets, goals, reports, etc.)</td></tr>
+    <tr><td>server/models/</td><td>Database connection and schema</td></tr>
+    <tr><td>server/middleware/</td><td>JWT authentication middleware</td></tr>
+    <tr><td>public/index.html</td><td>Frontend single page application</td></tr>
+    <tr><td>public/js/app.js</td><td>Alpine.js application logic</td></tr>
+    <tr><td>public/css/app.css</td><td>Custom styles</td></tr>
+    <tr><td>.env</td><td>Environment variables (DB connection, JWT secret)</td></tr>
+  </table>
+
+  <!-- 12. SCREENSHOTS -->
+  <h2 id="screenshots">12. Application Screenshots</h2>
+
+  <h3>Login Page</h3>
+  <p>Users enter their email and password to access the app.</p>
+  <img src="docs_img/01-login.png" alt="Login Page" style="max-width:600px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Dashboard</h3>
+  <p>The main screen shows balance, income, expenses, active budgets/goals, and recent transactions.</p>
+  <img src="docs_img/03-dashboard.png" alt="Dashboard" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Transactions</h3>
+  <p>All income and expense records with edit and delete options.</p>
+  <img src="docs_img/04-transactions.png" alt="Transactions" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Add Transaction Form</h3>
+  <p>Users select type, category, amount, date, and description. Budget is checked automatically on expenses.</p>
+  <img src="docs_img/05-add-transaction-form.png" alt="Add Transaction" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Budgets</h3>
+  <p>Progress bars change color: green (safe), orange (nearing limit), red (exceeded).</p>
+  <img src="docs_img/06-budgets.png" alt="Budgets" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Savings Goals</h3>
+  <p>Goals show progress. When target is reached, a congratulations message appears.</p>
+  <img src="docs_img/08-goals.png" alt="Goals" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Reports</h3>
+  <p>Income vs expenses by category with date range filter, savings rate, and monthly trends.</p>
+  <img src="docs_img/09-reports.png" alt="Reports" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Notifications</h3>
+  <p>Budget alerts appear automatically when spending nears or exceeds limits.</p>
+  <img src="docs_img/10-notifications.png" alt="Notifications" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+</body>
+</html>

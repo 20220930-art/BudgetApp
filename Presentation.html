@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BudgetApp - CS251 Presentation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #1a1a2e; color: #eee; }
+  .slide { display: none; min-height: 100vh; padding: 50px 70px; flex-direction: column; justify-content: center; }
+  .slide.active { display: flex; }
+  h1 { font-size: 3em; margin-bottom: 20px; color: #4fc3f7; }
+  h2 { font-size: 2em; margin-bottom: 20px; color: #4fc3f7; border-bottom: 3px solid #4fc3f7; padding-bottom: 8px; display: inline-block; }
+  h3 { font-size: 1.4em; color: #81d4fa; margin: 12px 0 8px; }
+  p, li { font-size: 1.2em; line-height: 1.7; }
+  ul { padding-left: 25px; }
+  li { margin: 5px 0; }
+  .cover { text-align: center; align-items: center; }
+  .cover h1 { font-size: 3.5em; }
+  .cover p { font-size: 1.3em; }
+  .two-col { display: flex; gap: 40px; }
+  .two-col > div { flex: 1; }
+  .card { background: #16213e; border-radius: 10px; padding: 18px; margin: 8px 0; border-left: 4px solid #4fc3f7; }
+  .badge { display: inline-block; background: #4fc3f7; color: #1a1a2e; padding: 3px 10px; border-radius: 15px; font-weight: bold; font-size: 0.8em; margin-right: 6px; }
+  .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+  .tech-card { background: #16213e; border-radius: 10px; padding: 15px; text-align: center; }
+  .tech-card h4 { color: #4fc3f7; margin-bottom: 6px; }
+  .tech-card p { font-size: 0.95em; color: #aaa; }
+  .nav { position: fixed; bottom: 25px; right: 35px; display: flex; gap: 8px; z-index: 100; }
+  .nav button { background: #4fc3f7; color: #1a1a2e; border: none; padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 0.95em; font-weight: bold; }
+  .nav button:hover { background: #81d4fa; }
+  .slide-num { position: fixed; bottom: 30px; left: 35px; color: #666; font-size: 0.95em; }
+  img { max-width: 100%; max-height: 420px; border-radius: 8px; border: 2px solid #333; margin: 8px 0; display: block; margin-left: auto; margin-right: auto; }
+  img.small { max-height: 280px; }
+  img.tiny { max-height: 200px; }
+  .img-row { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+  .img-row img { max-width: 48%; max-height: 350px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th { background: #4fc3f7; color: #1a1a2e; padding: 8px 12px; text-align: left; font-size: 1em; }
+  td { border: 1px solid #333; padding: 8px 12px; font-size: 1em; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide active cover" id="s1">
+  <h1>BudgetApp</h1>
+  <p style="font-size:1.5em; color:#81d4fa; margin-bottom:25px;">Personal Budget Management Software</p>
+  <p>Alaa Eldin Abdullah Hassan Ali</p>
+  <p style="color:#aaa;">ID: 20220930 | Section: S12</p>
+  <p style="color:#aaa; margin-top:15px;">CS251 - Intro to Software Engineering</p>
+  <p style="color:#aaa;">TA: Basma Mukhtar Hussain</p>
+  <p style="color:#666; margin-top:30px;">Cairo University - Faculty of Computers and AI | 2026</p>
+</div>
+
+<!-- SLIDE 2: AGENDA -->
+<div class="slide" id="s2">
+  <h2>Agenda</h2>
+  <div class="two-col">
+    <div>
+      <ol>
+        <li>Project Overview</li>
+        <li>Technology Stack</li>
+        <li>System Architecture (MVC)</li>
+        <li>Database Schema (ERD)</li>
+        <li>Class Diagram</li>
+        <li>Sequence Diagrams</li>
+      </ol>
+    </div>
+    <div>
+      <ol start="7">
+        <li>State Diagrams</li>
+        <li>SOLID Principles</li>
+        <li>Design Patterns</li>
+        <li>Live Demo Screenshots</li>
+        <li>Challenges and Lessons</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: OVERVIEW -->
+<div class="slide" id="s3">
+  <h2>Project Overview</h2>
+  <div class="two-col">
+    <div>
+      <p>BudgetApp helps users track income, expenses, budgets, and savings goals.</p>
+      <h3>Core Features</h3>
+      <ul>
+        <li>User registration and login</li>
+        <li>Add income and expense transactions</li>
+        <li>Create monthly budgets per category</li>
+        <li>Budget alerts when nearing or exceeding limits</li>
+        <li>Savings goals with progress tracking</li>
+        <li>Reports and analytics by category</li>
+        <li>Notification system for budget alerts</li>
+      </ul>
+    </div>
+    <div>
+      <h3>7 User Stories</h3>
+      <div class="card"><p><span class="badge">US#1</span> Sign Up &nbsp; <span class="badge">US#2</span> Login</p></div>
+      <div class="card"><p><span class="badge">US#3</span> Add Transaction</p></div>
+      <div class="card"><p><span class="badge">US#4</span> Create Budget</p></div>
+      <div class="card"><p><span class="badge">US#5</span> Budget Alert</p></div>
+      <div class="card"><p><span class="badge">US#6</span> Track Goals</p></div>
+      <div class="card"><p><span class="badge">US#7</span> View Reports</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: TECH STACK -->
+<div class="slide" id="s4">
+  <h2>Technology Stack</h2>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <h4>Frontend</h4>
+      <p>Alpine.js</p>
+      <p>Bootstrap 5</p>
+      <p>HTML5</p>
+    </div>
+    <div class="tech-card">
+      <h4>Backend</h4>
+      <p>Node.js</p>
+      <p>Express.js</p>
+      <p>JWT Auth</p>
+    </div>
+    <div class="tech-card">
+      <h4>Database</h4>
+      <p>PostgreSQL</p>
+      <p>pg (node-postgres)</p>
+      <p>bcryptjs</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <p>Alpine.js is lightweight and works in HTML without a build step. Express provides clean API routes. PostgreSQL handles persistent data with ACID transactions. pg library manages connection pooling.</p>
+  </div>
+</div>
+
+<!-- SLIDE 5: ARCHITECTURE -->
+<div class="slide" id="s5">
+  <h2>System Architecture - MVC</h2>
+  <img src="img/layered-architecture.png" alt="MVC Architecture Diagram">
+  <div class="two-col" style="margin-top:10px;">
+    <div class="card"><h3>View</h3><p>Alpine.js + Bootstrap - UI and API calls</p></div>
+    <div class="card"><h3>Controller</h3><p>Express routes - validates, coordinates</p></div>
+    <div class="card"><h3>Model</h3><p>PostgreSQL + pg - data storage</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 6: DATABASE ERD -->
+<div class="slide" id="s6">
+  <h2>Database Schema (ERD)</h2>
+  <img src="img/erd.png" alt="ERD Diagram">
+  <p style="text-align:center; color:#aaa; margin-top:8px;">6 tables: users, categories, transactions, budgets, goals, notifications</p>
+</div>
+
+<!-- SLIDE 7: CLASS DIAGRAM -->
+<div class="slide" id="s7">
+  <h2>Class Diagram</h2>
+  <img src="img/class-diagram.png" alt="Class Diagram">
+  <p style="text-align:center; color:#aaa; margin-top:8px;">Model classes map to database tables. ExpressRouter and PgPool handle infrastructure.</p>
+</div>
+
+<!-- SLIDE 8: SEQUENCE DIAGRAMS 1 -->
+<div class="slide" id="s8">
+  <h2>Sequence Diagrams (US#1, #2, #3)</h2>
+  <div class="img-row">
+    <img src="img/sequence-signup.png" class="small" alt="Sign Up Sequence">
+    <img src="img/sequence-add-transaction.png" class="small" alt="Add Transaction Sequence">
+  </div>
+  <p style="text-align:center; color:#aaa;">Sign Up creates user + default categories. Add Transaction inserts record then checks budget.</p>
+</div>
+
+<!-- SLIDE 9: SEQUENCE DIAGRAMS 2 -->
+<div class="slide" id="s9">
+  <h2>Sequence Diagrams (US#5, #6, #7)</h2>
+  <div class="img-row">
+    <img src="img/sequence-budget-alert.png" class="small" alt="Budget Alert Sequence">
+    <img src="img/sequence-goals.png" class="small" alt="Goals Sequence">
+  </div>
+  <div style="text-align:center; margin-top:8px;">
+    <img src="img/sequence-reports.png" class="small" alt="Reports Sequence">
+  </div>
+</div>
+
+<!-- SLIDE 10: STATE DIAGRAMS -->
+<div class="slide" id="s10">
+  <h2>State Diagrams</h2>
+  <div class="img-row">
+    <img src="img/state-diagram-budget.png" class="small" alt="Budget State">
+    <img src="img/state-diagram-goal.png" class="small" alt="Goal State">
+  </div>
+  <div style="text-align:center; margin-top:8px;">
+    <img src="img/state-diagram-session.png" class="tiny" alt="Session State">
+  </div>
+</div>
+
+<!-- SLIDE 11: SOLID -->
+<div class="slide" id="s11">
+  <h2>SOLID Principles</h2>
+  <div class="card">
+    <h3>1. Single Responsibility</h3>
+    <p>Each route file handles one thing. authRoutes.js = login/signup only. transactionRoutes.js = transactions only.</p>
+  </div>
+  <div class="card">
+    <h3>2. Open/Closed</h3>
+    <p>New report or notification types added without changing existing code.</p>
+  </div>
+  <div class="card">
+    <h3>3. Dependency Inversion</h3>
+    <p>All models depend on PgPool abstraction. Switch databases = change one file.</p>
+  </div>
+</div>
+
+<!-- SLIDE 12: DESIGN PATTERNS -->
+<div class="slide" id="s12">
+  <h2>Design Patterns</h2>
+  <div class="tech-grid">
+    <div class="tech-card"><h4>MVC</h4><p>Views, Controllers, Models cleanly separated</p></div>
+    <div class="tech-card"><h4>Observer</h4><p>Budget alerts trigger on transaction save</p></div>
+    <div class="tech-card"><h4>Singleton</h4><p>One shared PostgreSQL connection pool</p></div>
+    <div class="tech-card"><h4>Strategy</h4><p>Different query strategies per report type</p></div>
+    <div class="tech-card"><h4>Middleware</h4><p>JWT auth + validation before route handlers</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 13: DEMO - LOGIN + DASHBOARD -->
+<div class="slide" id="s13">
+  <h2>Live Demo - Login and Dashboard</h2>
+  <div class="img-row">
+    <div style="text-align:center;"><img src="img/01-login.png" class="small" alt="Login"><p style="color:#aaa;font-size:0.9em;">Login Page</p></div>
+    <div style="text-align:center;"><img src="img/02-login-filled.png" class="small" alt="Login Filled"><p style="color:#aaa;font-size:0.9em;">Login with Credentials</p></div>
+  </div>
+  <div style="text-align:center; margin-top:5px;">
+    <img src="img/03-dashboard.png" class="small" alt="Dashboard"><p style="color:#aaa;font-size:0.9em;">Dashboard - Balance, Income, Expenses, Recent Transactions</p>
+  </div>
+</div>
+
+<!-- SLIDE 14: DEMO - TRANSACTIONS -->
+<div class="slide" id="s14">
+  <h2>Live Demo - Transactions</h2>
+  <div class="img-row">
+    <div style="text-align:center;"><img src="img/04-transactions.png" class="small" alt="Transactions"><p style="color:#aaa;font-size:0.9em;">Transaction List</p></div>
+    <div style="text-align:center;"><img src="img/05-add-transaction-form.png" class="small" alt="Add Transaction"><p style="color:#aaa;font-size:0.9em;">Add Transaction Form</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 15: DEMO - BUDGETS -->
+<div class="slide" id="s15">
+  <h2>Live Demo - Budgets</h2>
+  <div class="img-row">
+    <div style="text-align:center;"><img src="img/06-budgets.png" class="small" alt="Budgets"><p style="color:#aaa;font-size:0.9em;">Budget Progress Bars (Green/Orange/Red)</p></div>
+    <div style="text-align:center;"><img src="img/07-create-budget-form.png" class="small" alt="Create Budget"><p style="color:#aaa;font-size:0.9em;">Create Budget Form</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 16: DEMO - GOALS -->
+<div class="slide" id="s16">
+  <h2>Live Demo - Savings Goals</h2>
+  <div style="text-align:center;">
+    <img src="img/08-goals.png" class="small" alt="Goals"><p style="color:#aaa;font-size:0.9em;">Goals with Progress Bars - One Completed with Congratulations Message</p>
+  </div>
+</div>
+
+<!-- SLIDE 17: DEMO - REPORTS + NOTIFICATIONS -->
+<div class="slide" id="s17">
+  <h2>Live Demo - Reports and Notifications</h2>
+  <div class="img-row">
+    <div style="text-align:center;"><img src="img/09-reports.png" class="small" alt="Reports"><p style="color:#aaa;font-size:0.9em;">Reports - Category Breakdown, Savings Rate, Trends</p></div>
+    <div style="text-align:center;"><img src="img/10-notifications.png" class="small" alt="Notifications"><p style="color:#aaa;font-size:0.9em;">Budget Alert Notifications</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 18: CHALLENGES -->
+<div class="slide" id="s18">
+  <h2>Challenges and Lessons</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>Challenges</h3>
+        <ul>
+          <li>Learning Alpine.js reactivity model</li>
+          <li>PostgreSQL connection pooling with pg</li>
+          <li>Budget alert logic triggering after transactions</li>
+          <li>State management without a router</li>
+          <li>JWT token handling in browser</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Lessons Learned</h3>
+        <ul>
+          <li>MVC makes code easier to maintain</li>
+          <li>SOLID keeps codebase organized</li>
+          <li>Design patterns solve real problems</li>
+          <li>Good DB schema design is crucial</li>
+          <li>Planning diagrams before code saves time</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 19: THANK YOU -->
+<div class="slide cover" id="s19">
+  <h1>Thank You</h1>
+  <p style="font-size:1.5em; color:#81d4fa; margin-bottom:25px;">Questions?</p>
+  <div class="card" style="max-width:450px; margin:0 auto;">
+    <p><strong>Alaa Eldin Abdullah Hassan Ali</strong></p>
+    <p style="color:#aaa;">ID: 20220930 | Section: S12</p>
+    <p style="color:#aaa;">CS251 - Intro to Software Engineering</p>
+    <p style="color:#aaa;">TA: Basma Mukhtar Hussain</p>
+  </div>
+</div>
+
+<div class="slide-num" id="slideNum">1 / 16</div>
+<div class="nav">
+  <button onclick="prev()">&#8592; Prev</button>
+  <button onclick="next()">Next &#8594;</button>
+</div>
+
+<script>
+let current = 1;
+const total = 19;
+function show(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('slideNum').textContent = n + ' / ' + total;
+}
+function next() { if (current < total) { current++; show(current); } }
+function prev() { if (current > 1) { current--; show(current); } }
+document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') next(); if (e.key === 'ArrowLeft') prev(); });
+</script>
+</body>
+</html>
