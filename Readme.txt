@@ -44,6 +44,10 @@ docs/
 .env                - Environment variables (database URL, JWT secret)
 package.json        - Project dependencies and start script
 
+=== GITHUB ===
+
+https://github.com/20220930-art/BudgetApp
+
 === TOOLS USED ===
 
 - Node.js (runtime)

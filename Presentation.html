@@ -1,336 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BudgetApp - CS251 Presentation</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #1a1a2e; color: #eee; }
-  .slide { display: none; min-height: 100vh; padding: 50px 70px; flex-direction: column; justify-content: center; }
-  .slide.active { display: flex; }
-  h1 { font-size: 3em; margin-bottom: 20px; color: #4fc3f7; }
-  h2 { font-size: 2em; margin-bottom: 20px; color: #4fc3f7; border-bottom: 3px solid #4fc3f7; padding-bottom: 8px; display: inline-block; }
-  h3 { font-size: 1.4em; color: #81d4fa; margin: 12px 0 8px; }
-  p, li { font-size: 1.2em; line-height: 1.7; }
-  ul { padding-left: 25px; }
-  li { margin: 5px 0; }
-  .cover { text-align: center; align-items: center; }
-  .cover h1 { font-size: 3.5em; }
-  .cover p { font-size: 1.3em; }
-  .two-col { display: flex; gap: 40px; }
-  .two-col > div { flex: 1; }
-  .card { background: #16213e; border-radius: 10px; padding: 18px; margin: 8px 0; border-left: 4px solid #4fc3f7; }
-  .badge { display: inline-block; background: #4fc3f7; color: #1a1a2e; padding: 3px 10px; border-radius: 15px; font-weight: bold; font-size: 0.8em; margin-right: 6px; }
-  .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
-  .tech-card { background: #16213e; border-radius: 10px; padding: 15px; text-align: center; }
-  .tech-card h4 { color: #4fc3f7; margin-bottom: 6px; }
-  .tech-card p { font-size: 0.95em; color: #aaa; }
-  .nav { position: fixed; bottom: 25px; right: 35px; display: flex; gap: 8px; z-index: 100; }
-  .nav button { background: #4fc3f7; color: #1a1a2e; border: none; padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 0.95em; font-weight: bold; }
-  .nav button:hover { background: #81d4fa; }
-  .slide-num { position: fixed; bottom: 30px; left: 35px; color: #666; font-size: 0.95em; }
-  img { max-width: 100%; max-height: 420px; border-radius: 8px; border: 2px solid #333; margin: 8px 0; display: block; margin-left: auto; margin-right: auto; }
-  img.small { max-height: 280px; }
-  img.tiny { max-height: 200px; }
-  .img-row { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-  .img-row img { max-width: 48%; max-height: 350px; }
-  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
-  th { background: #4fc3f7; color: #1a1a2e; padding: 8px 12px; text-align: left; font-size: 1em; }
-  td { border: 1px solid #333; padding: 8px 12px; font-size: 1em; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BudgetApp - User Guide</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; color: #333; line-height: 1.6; }
+    h1 { color: #1a73e8; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; }
+    h2 { color: #333; margin-top: 40px; border-left: 4px solid #1a73e8; padding-left: 12px; }
+    h3 { color: #555; }
+    .step { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px 20px; margin: 15px 0; }
+    .step-number { display: inline-block; background: #1a73e8; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; margin-right: 10px; }
+    .tip { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 15px 0; border-radius: 4px; }
+    .warning { background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px 16px; margin: 15px 0; border-radius: 4px; }
+    code { background: #f1f1f1; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    th, td { border: 1px solid #dee2e6; padding: 10px 14px; text-align: left; }
+    th { background: #1a73e8; color: white; }
+    tr:nth-child(even) { background: #f8f9fa; }
+    .toc { background: #f8f9fa; padding: 20px 30px; border-radius: 8px; margin: 20px 0; }
+    .toc a { color: #1a73e8; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .toc li { margin: 6px 0; }
+  </style>
 </head>
 <body>
 
-<!-- SLIDE 1: COVER -->
-<div class="slide active cover" id="s1">
-  <h1>BudgetApp</h1>
-  <p style="font-size:1.5em; color:#81d4fa; margin-bottom:25px;">Personal Budget Management Software</p>
-  <p>Alaa Eldin Abdullah Hassan Ali</p>
-  <p style="color:#aaa;">ID: 20220930 | Section: S12</p>
-  <p style="color:#aaa; margin-top:15px;">CS251 - Intro to Software Engineering</p>
-  <p style="color:#aaa;">TA: Basma Mukhtar Hussain</p>
-  <p style="color:#666; margin-top:30px;">Cairo University - Faculty of Computers and AI | 2026</p>
-</div>
+  <h1>BudgetApp - User Guide</h1>
+  <p><strong>Personal Budget Management Software</strong></p>
+  <p>Course: CS251 - Intro to Software Engineering | Student: Alaa Eldin Abdullah Hassan Ali | ID: 20220930 | Section: S12 | TA: Basma Mukhtar Hussain</p>
 
-<!-- SLIDE 2: AGENDA -->
-<div class="slide" id="s2">
-  <h2>Agenda</h2>
-  <div class="two-col">
-    <div>
-      <ol>
-        <li>Project Overview</li>
-        <li>Technology Stack</li>
-        <li>System Architecture (MVC)</li>
-        <li>Database Schema (ERD)</li>
-        <li>Class Diagram</li>
-        <li>Sequence Diagrams</li>
-      </ol>
-    </div>
-    <div>
-      <ol start="7">
-        <li>State Diagrams</li>
-        <li>SOLID Principles</li>
-        <li>Design Patterns</li>
-        <li>Live Demo Screenshots</li>
-        <li>Challenges and Lessons</li>
-      </ol>
-    </div>
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#setup">Setup and Installation</a></li>
+      <li><a href="#signup">Creating an Account</a></li>
+      <li><a href="#login">Logging In</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#transactions">Managing Transactions</a></li>
+      <li><a href="#budgets">Creating and Tracking Budgets</a></li>
+      <li><a href="#alerts">Budget Alerts</a></li>
+      <li><a href="#goals">Savings Goals</a></li>
+      <li><a href="#reports">Reports and Analytics</a></li>
+      <li><a href="#notifications">Notifications</a></li>
+      <li><a href="#tech">Technology Stack</a></li>
+    </ol>
   </div>
-</div>
 
-<!-- SLIDE 3: OVERVIEW -->
-<div class="slide" id="s3">
-  <h2>Project Overview</h2>
-  <div class="two-col">
-    <div>
-      <p>BudgetApp helps users track income, expenses, budgets, and savings goals.</p>
-      <h3>Core Features</h3>
-      <ul>
-        <li>User registration and login</li>
-        <li>Add income and expense transactions</li>
-        <li>Create monthly budgets per category</li>
-        <li>Budget alerts when nearing or exceeding limits</li>
-        <li>Savings goals with progress tracking</li>
-        <li>Reports and analytics by category</li>
-        <li>Notification system for budget alerts</li>
-      </ul>
-    </div>
-    <div>
-      <h3>7 User Stories</h3>
-      <div class="card"><p><span class="badge">US#1</span> Sign Up &nbsp; <span class="badge">US#2</span> Login</p></div>
-      <div class="card"><p><span class="badge">US#3</span> Add Transaction</p></div>
-      <div class="card"><p><span class="badge">US#4</span> Create Budget</p></div>
-      <div class="card"><p><span class="badge">US#5</span> Budget Alert</p></div>
-      <div class="card"><p><span class="badge">US#6</span> Track Goals</p></div>
-      <div class="card"><p><span class="badge">US#7</span> View Reports</p></div>
-    </div>
-  </div>
-</div>
+  <!-- 1. SETUP -->
+  <h2 id="setup">1. Setup and Installation</h2>
 
-<!-- SLIDE 4: TECH STACK -->
-<div class="slide" id="s4">
-  <h2>Technology Stack</h2>
-  <div class="tech-grid">
-    <div class="tech-card">
-      <h4>Frontend</h4>
-      <p>Alpine.js</p>
-      <p>Bootstrap 5</p>
-      <p>HTML5</p>
-    </div>
-    <div class="tech-card">
-      <h4>Backend</h4>
-      <p>Node.js</p>
-      <p>Express.js</p>
-      <p>JWT Auth</p>
-    </div>
-    <div class="tech-card">
-      <h4>Database</h4>
-      <p>PostgreSQL</p>
-      <p>pg (node-postgres)</p>
-      <p>bcryptjs</p>
-    </div>
-  </div>
-  <div class="card" style="margin-top:20px;">
-    <p>Alpine.js is lightweight and works in HTML without a build step. Express provides clean API routes. PostgreSQL handles persistent data with ACID transactions. pg library manages connection pooling.</p>
-  </div>
-</div>
+  <h3>Prerequisites</h3>
+  <ul>
+    <li>Node.js (v18 or higher)</li>
+    <li>PostgreSQL (v15 or higher)</li>
+    <li>npm (comes with Node.js)</li>
+  </ul>
 
-<!-- SLIDE 5: ARCHITECTURE -->
-<div class="slide" id="s5">
-  <h2>System Architecture - MVC</h2>
-  <img src="img/layered-architecture.png" alt="MVC Architecture Diagram">
-  <div class="two-col" style="margin-top:10px;">
-    <div class="card"><h3>View</h3><p>Alpine.js + Bootstrap - UI and API calls</p></div>
-    <div class="card"><h3>Controller</h3><p>Express routes - validates, coordinates</p></div>
-    <div class="card"><h3>Model</h3><p>PostgreSQL + pg - data storage</p></div>
+  <h3>Steps</h3>
+  <div class="step">
+    <span class="step-number">1</span> Create a PostgreSQL database named <code>budgetapp</code>
   </div>
-</div>
+  <div class="step">
+    <span class="step-number">2</span> Open the <code>.env</code> file and update the database connection string:
+    <br><code>DATABASE_URL=postgresql://username:password@localhost:5432/budgetapp</code>
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Open a terminal in the project folder and run:
+    <br><code>npm install</code>
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Start the server:
+    <br><code>npm start</code>
+  </div>
+  <div class="step">
+    <span class="step-number">5</span> Open your browser and go to <code>http://localhost:3000</code>
+  </div>
 
-<!-- SLIDE 6: DATABASE ERD -->
-<div class="slide" id="s6">
-  <h2>Database Schema (ERD)</h2>
-  <img src="img/erd.png" alt="ERD Diagram">
-  <p style="text-align:center; color:#aaa; margin-top:8px;">6 tables: users, categories, transactions, budgets, goals, notifications</p>
-</div>
+  <div class="tip">
+    The database tables are created automatically when the server starts for the first time. Default categories (Salary, Freelance, Food, Transport, Shopping, Bills, Entertainment, Health, Other) are added when you register.
+  </div>
 
-<!-- SLIDE 7: CLASS DIAGRAM -->
-<div class="slide" id="s7">
-  <h2>Class Diagram</h2>
-  <img src="img/class-diagram.png" alt="Class Diagram">
-  <p style="text-align:center; color:#aaa; margin-top:8px;">Model classes map to database tables. ExpressRouter and PgPool handle infrastructure.</p>
-</div>
+  <!-- 2. SIGNUP -->
+  <h2 id="signup">2. Creating an Account</h2>
+  <div class="step">
+    <span class="step-number">1</span> Open the app in your browser. You will see the login page.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"Don't have an account? Sign up"</strong> at the bottom.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Enter your name, email, and a password.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Sign Up"</strong>. You will be redirected to the Dashboard automatically.
+  </div>
 
-<!-- SLIDE 8: SEQUENCE DIAGRAMS 1 -->
-<div class="slide" id="s8">
-  <h2>Sequence Diagrams (US#1, #2, #3)</h2>
-  <div class="img-row">
-    <img src="img/sequence-signup.png" class="small" alt="Sign Up Sequence">
-    <img src="img/sequence-add-transaction.png" class="small" alt="Add Transaction Sequence">
+  <!-- 3. LOGIN -->
+  <h2 id="login">3. Logging In</h2>
+  <div class="step">
+    <span class="step-number">1</span> Enter your email and password on the login page.
   </div>
-  <p style="text-align:center; color:#aaa;">Sign Up creates user + default categories. Add Transaction inserts record then checks budget.</p>
-</div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"Login"</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> If the credentials are correct, you will be taken to the Dashboard.
+  </div>
+  <div class="warning">
+    If you enter a wrong email or password, a red error message will appear below the form.
+  </div>
 
-<!-- SLIDE 9: SEQUENCE DIAGRAMS 2 -->
-<div class="slide" id="s9">
-  <h2>Sequence Diagrams (US#5, #6, #7)</h2>
-  <div class="img-row">
-    <img src="img/sequence-budget-alert.png" class="small" alt="Budget Alert Sequence">
-    <img src="img/sequence-goals.png" class="small" alt="Goals Sequence">
-  </div>
-  <div style="text-align:center; margin-top:8px;">
-    <img src="img/sequence-reports.png" class="small" alt="Reports Sequence">
-  </div>
-</div>
+  <!-- 4. DASHBOARD -->
+  <h2 id="dashboard">4. Dashboard</h2>
+  <p>The Dashboard is the main screen you see after logging in. It shows:</p>
+  <table>
+    <tr><th>Card</th><th>Description</th></tr>
+    <tr><td>Balance</td><td>Your total income minus total expenses</td></tr>
+    <tr><td>Income</td><td>Total money you earned</td></tr>
+    <tr><td>Expenses</td><td>Total money you spent</td></tr>
+    <tr><td>Active Budgets</td><td>Number of budgets currently being tracked</td></tr>
+    <tr><td>Active Goals</td><td>Number of savings goals in progress</td></tr>
+  </table>
+  <p>Below the cards, you can see your <strong>5 most recent transactions</strong>.</p>
 
-<!-- SLIDE 10: STATE DIAGRAMS -->
-<div class="slide" id="s10">
-  <h2>State Diagrams</h2>
-  <div class="img-row">
-    <img src="img/state-diagram-budget.png" class="small" alt="Budget State">
-    <img src="img/state-diagram-goal.png" class="small" alt="Goal State">
-  </div>
-  <div style="text-align:center; margin-top:8px;">
-    <img src="img/state-diagram-session.png" class="tiny" alt="Session State">
-  </div>
-</div>
+  <!-- 5. TRANSACTIONS -->
+  <h2 id="transactions">5. Managing Transactions</h2>
 
-<!-- SLIDE 11: SOLID -->
-<div class="slide" id="s11">
-  <h2>SOLID Principles</h2>
-  <div class="card">
-    <h3>1. Single Responsibility</h3>
-    <p>Each route file handles one thing. authRoutes.js = login/signup only. transactionRoutes.js = transactions only.</p>
+  <h3>Adding a Transaction</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Transactions"</strong> in the navigation bar.
   </div>
-  <div class="card">
-    <h3>2. Open/Closed</h3>
-    <p>New report or notification types added without changing existing code.</p>
+  <div class="step">
+    <span class="step-number">2</span> Click the <strong>"+ Add Transaction"</strong> button at the top.
   </div>
-  <div class="card">
-    <h3>3. Dependency Inversion</h3>
-    <p>All models depend on PgPool abstraction. Switch databases = change one file.</p>
+  <div class="step">
+    <span class="step-number">3</span> Fill in the form:
+    <ul>
+      <li><strong>Type</strong>: Choose "Income" or "Expense"</li>
+      <li><strong>Category</strong>: Select a category (changes based on type)</li>
+      <li><strong>Amount</strong>: Enter the amount in EGP</li>
+      <li><strong>Date</strong>: Pick the date</li>
+      <li><strong>Description</strong>: Optional note about the transaction</li>
+    </ul>
   </div>
-</div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Save"</strong>.
+  </div>
 
-<!-- SLIDE 12: DESIGN PATTERNS -->
-<div class="slide" id="s12">
-  <h2>Design Patterns</h2>
-  <div class="tech-grid">
-    <div class="tech-card"><h4>MVC</h4><p>Views, Controllers, Models cleanly separated</p></div>
-    <div class="tech-card"><h4>Observer</h4><p>Budget alerts trigger on transaction save</p></div>
-    <div class="tech-card"><h4>Singleton</h4><p>One shared PostgreSQL connection pool</p></div>
-    <div class="tech-card"><h4>Strategy</h4><p>Different query strategies per report type</p></div>
-    <div class="tech-card"><h4>Middleware</h4><p>JWT auth + validation before route handlers</p></div>
-  </div>
-</div>
+  <h3>Editing a Transaction</h3>
+  <div class="step">
+    <span class="step-number">1</span> Find the transaction in the table.</div>
+  <div class="step">
+    <span class="step-number">2</span> Click the <strong>"Edit"</strong> button next to it.</div>
+  <div class="step">
+    <span class="step-number">3</span> The form will appear pre-filled with the transaction data. Make your changes and click <strong>"Save"</strong>.</div>
 
-<!-- SLIDE 13: DEMO - LOGIN + DASHBOARD -->
-<div class="slide" id="s13">
-  <h2>Live Demo - Login and Dashboard</h2>
-  <div class="img-row">
-    <div style="text-align:center;"><img src="img/01-login.png" class="small" alt="Login"><p style="color:#aaa;font-size:0.9em;">Login Page</p></div>
-    <div style="text-align:center;"><img src="img/02-login-filled.png" class="small" alt="Login Filled"><p style="color:#aaa;font-size:0.9em;">Login with Credentials</p></div>
-  </div>
-  <div style="text-align:center; margin-top:5px;">
-    <img src="img/03-dashboard.png" class="small" alt="Dashboard"><p style="color:#aaa;font-size:0.9em;">Dashboard - Balance, Income, Expenses, Recent Transactions</p>
-  </div>
-</div>
+  <h3>Deleting a Transaction</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click the <strong>"Delete"</strong> button next to the transaction.</div>
+  <div class="step">
+    <span class="step-number">2</span> Confirm the deletion in the popup.</div>
 
-<!-- SLIDE 14: DEMO - TRANSACTIONS -->
-<div class="slide" id="s14">
-  <h2>Live Demo - Transactions</h2>
-  <div class="img-row">
-    <div style="text-align:center;"><img src="img/04-transactions.png" class="small" alt="Transactions"><p style="color:#aaa;font-size:0.9em;">Transaction List</p></div>
-    <div style="text-align:center;"><img src="img/05-add-transaction-form.png" class="small" alt="Add Transaction"><p style="color:#aaa;font-size:0.9em;">Add Transaction Form</p></div>
+  <!-- 6. BUDGETS -->
+  <h2 id="budgets">6. Creating and Tracking Budgets</h2>
+
+  <h3>Creating a Budget</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Budgets"</strong> in the navigation bar.
   </div>
-</div>
-
-<!-- SLIDE 15: DEMO - BUDGETS -->
-<div class="slide" id="s15">
-  <h2>Live Demo - Budgets</h2>
-  <div class="img-row">
-    <div style="text-align:center;"><img src="img/06-budgets.png" class="small" alt="Budgets"><p style="color:#aaa;font-size:0.9em;">Budget Progress Bars (Green/Orange/Red)</p></div>
-    <div style="text-align:center;"><img src="img/07-create-budget-form.png" class="small" alt="Create Budget"><p style="color:#aaa;font-size:0.9em;">Create Budget Form</p></div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"+ Create Budget"</strong>.
   </div>
-</div>
-
-<!-- SLIDE 16: DEMO - GOALS -->
-<div class="slide" id="s16">
-  <h2>Live Demo - Savings Goals</h2>
-  <div style="text-align:center;">
-    <img src="img/08-goals.png" class="small" alt="Goals"><p style="color:#aaa;font-size:0.9em;">Goals with Progress Bars - One Completed with Congratulations Message</p>
+  <div class="step">
+    <span class="step-number">3</span> Fill in the form:
+    <ul>
+      <li><strong>Category</strong>: Which expense category to track</li>
+      <li><strong>Amount</strong>: Your monthly spending limit in EGP</li>
+      <li><strong>Month/Year</strong>: Which month this budget applies to</li>
+      <li><strong>Alert %</strong>: At what percentage you want to be warned (default 80%)</li>
+    </ul>
   </div>
-</div>
-
-<!-- SLIDE 17: DEMO - REPORTS + NOTIFICATIONS -->
-<div class="slide" id="s17">
-  <h2>Live Demo - Reports and Notifications</h2>
-  <div class="img-row">
-    <div style="text-align:center;"><img src="img/09-reports.png" class="small" alt="Reports"><p style="color:#aaa;font-size:0.9em;">Reports - Category Breakdown, Savings Rate, Trends</p></div>
-    <div style="text-align:center;"><img src="img/10-notifications.png" class="small" alt="Notifications"><p style="color:#aaa;font-size:0.9em;">Budget Alert Notifications</p></div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Save"</strong>.
   </div>
-</div>
 
-<!-- SLIDE 18: CHALLENGES -->
-<div class="slide" id="s18">
-  <h2>Challenges and Lessons</h2>
-  <div class="two-col">
-    <div>
-      <div class="card">
-        <h3>Challenges</h3>
-        <ul>
-          <li>Learning Alpine.js reactivity model</li>
-          <li>PostgreSQL connection pooling with pg</li>
-          <li>Budget alert logic triggering after transactions</li>
-          <li>State management without a router</li>
-          <li>JWT token handling in browser</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <div class="card">
-        <h3>Lessons Learned</h3>
-        <ul>
-          <li>MVC makes code easier to maintain</li>
-          <li>SOLID keeps codebase organized</li>
-          <li>Design patterns solve real problems</li>
-          <li>Good DB schema design is crucial</li>
-          <li>Planning diagrams before code saves time</li>
-        </ul>
-      </div>
-    </div>
+  <h3>Budget Progress</h3>
+  <p>Each budget shows a progress bar:</p>
+  <ul>
+    <li><span style="color:green;font-weight:bold">Green</span> = spending is under control</li>
+    <li><span style="color:orange;font-weight:bold">Orange</span> = nearing your alert threshold</li>
+    <li><span style="color:red;font-weight:bold">Red</span> = you exceeded the budget</li>
+  </ul>
+
+  <!-- 7. ALERTS -->
+  <h2 id="alerts">7. Budget Alerts</h2>
+  <p>When you add an expense, the system automatically checks if you are close to or over your budget for that category:</p>
+  <table>
+    <tr><th>Status</th><th>What Happens</th></tr>
+    <tr><td>Under threshold</td><td>Nothing happens, progress bar stays green</td></tr>
+    <tr><td>Near limit (e.g. 80%+)</td><td>Orange warning notification is created</td></tr>
+    <tr><td>Exceeded</td><td>Red alert notification is created</td></tr>
+  </table>
+  <div class="tip">
+    You can see alerts in the Notifications page. The badge on "Notifications" in the navbar shows how many unread alerts you have.
   </div>
-</div>
 
-<!-- SLIDE 19: THANK YOU -->
-<div class="slide cover" id="s19">
-  <h1>Thank You</h1>
-  <p style="font-size:1.5em; color:#81d4fa; margin-bottom:25px;">Questions?</p>
-  <div class="card" style="max-width:450px; margin:0 auto;">
-    <p><strong>Alaa Eldin Abdullah Hassan Ali</strong></p>
-    <p style="color:#aaa;">ID: 20220930 | Section: S12</p>
-    <p style="color:#aaa;">CS251 - Intro to Software Engineering</p>
-    <p style="color:#aaa;">TA: Basma Mukhtar Hussain</p>
+  <!-- 8. GOALS -->
+  <h2 id="goals">8. Savings Goals</h2>
+
+  <h3>Creating a Goal</h3>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Goals"</strong> in the navigation bar.
   </div>
-</div>
+  <div class="step">
+    <span class="step-number">2</span> Click <strong>"+ New Goal"</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Enter a name, target amount, and optional deadline.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span> Click <strong>"Save"</strong>. The goal appears with a 0% progress bar.
+  </div>
 
-<div class="slide-num" id="slideNum">1 / 16</div>
-<div class="nav">
-  <button onclick="prev()">&#8592; Prev</button>
-  <button onclick="next()">Next &#8594;</button>
-</div>
+  <h3>Adding Money to a Goal</h3>
+  <div class="step">
+    <span class="step-number">1</span> Find the goal card.</div>
+  <div class="step">
+    <span class="step-number">2</span> Enter an amount in the small input field.</div>
+  <div class="step">
+    <span class="step-number">3</span> Click <strong>"Add Money"</strong>.</div>
+  <div class="step">
+    <span class="step-number">4</span> The progress bar updates. When you reach the target, a congratulations message appears and the goal is marked as completed.</div>
 
-<script>
-let current = 1;
-const total = 19;
-function show(n) {
-  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
-  document.getElementById('slideNum').textContent = n + ' / ' + total;
-}
-function next() { if (current < total) { current++; show(current); } }
-function prev() { if (current > 1) { current--; show(current); } }
-document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') next(); if (e.key === 'ArrowLeft') prev(); });
-</script>
+  <!-- 9. REPORTS -->
+  <h2 id="reports">9. Reports and Analytics</h2>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Reports"</strong> in the navigation bar.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> Optionally select a date range (From and To).
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Click <strong>"Generate"</strong>.
+  </div>
+  <p>The report shows:</p>
+  <ul>
+    <li><strong>Total Income / Total Expenses / Savings Rate</strong> - summary cards at the top</li>
+    <li><strong>Spending by Category</strong> - table showing how much you spent per category</li>
+    <li><strong>Monthly Trend</strong> - income and expenses broken down by month</li>
+    <li><strong>Top expense category</strong> - which category you spend the most on</li>
+  </ul>
+
+  <!-- 10. NOTIFICATIONS -->
+  <h2 id="notifications">10. Notifications</h2>
+  <div class="step">
+    <span class="step-number">1</span> Click <strong>"Notifications"</strong> in the navigation bar (shows a red badge with unread count).
+  </div>
+  <div class="step">
+    <span class="step-number">2</span> You will see a list of all budget alerts with timestamps.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span> Click <strong>"Mark all as read"</strong> to clear the badge counter.
+  </div>
+
+  <!-- 11. TECH STACK -->
+  <h2 id="tech">11. Technology Stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Technology</th></tr>
+    <tr><td>Frontend</td><td>Alpine.js, Bootstrap 5, HTML5</td></tr>
+    <tr><td>Backend</td><td>Node.js, Express.js</td></tr>
+    <tr><td>Database</td><td>PostgreSQL (via pg library)</td></tr>
+    <tr><td>Authentication</td><td>JWT (JSON Web Tokens), bcryptjs</td></tr>
+  </table>
+
+  <h3>Project Structure</h3>
+  <table>
+    <tr><th>File/Folder</th><th>Purpose</th></tr>
+    <tr><td>server/index.js</td><td>Main server entry point</td></tr>
+    <tr><td>server/routes/</td><td>API route handlers (auth, transactions, budgets, goals, reports, etc.)</td></tr>
+    <tr><td>server/models/</td><td>Database connection and schema</td></tr>
+    <tr><td>server/middleware/</td><td>JWT authentication middleware</td></tr>
+    <tr><td>public/index.html</td><td>Frontend single page application</td></tr>
+    <tr><td>public/js/app.js</td><td>Alpine.js application logic</td></tr>
+    <tr><td>public/css/app.css</td><td>Custom styles</td></tr>
+    <tr><td>.env</td><td>Environment variables (DB connection, JWT secret)</td></tr>
+  </table>
+
+  <!-- 12. SCREENSHOTS -->
+  <h2 id="screenshots">12. Application Screenshots</h2>
+
+  <h3>Login Page</h3>
+  <p>Users enter their email and password to access the app.</p>
+  <img src="docs_img/01-login.png" alt="Login Page" style="max-width:600px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Dashboard</h3>
+  <p>The main screen shows balance, income, expenses, active budgets/goals, and recent transactions.</p>
+  <img src="docs_img/03-dashboard.png" alt="Dashboard" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Transactions</h3>
+  <p>All income and expense records with edit and delete options.</p>
+  <img src="docs_img/04-transactions.png" alt="Transactions" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Add Transaction Form</h3>
+  <p>Users select type, category, amount, date, and description. Budget is checked automatically on expenses.</p>
+  <img src="docs_img/05-add-transaction-form.png" alt="Add Transaction" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Budgets</h3>
+  <p>Progress bars change color: green (safe), orange (nearing limit), red (exceeded).</p>
+  <img src="docs_img/06-budgets.png" alt="Budgets" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Savings Goals</h3>
+  <p>Goals show progress. When target is reached, a congratulations message appears.</p>
+  <img src="docs_img/08-goals.png" alt="Goals" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Reports</h3>
+  <p>Income vs expenses by category with date range filter, savings rate, and monthly trends.</p>
+  <img src="docs_img/09-reports.png" alt="Reports" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
+  <h3>Notifications</h3>
+  <p>Budget alerts appear automatically when spending nears or exceeds limits.</p>
+  <img src="docs_img/10-notifications.png" alt="Notifications" style="max-width:700px; border:1px solid #ddd; border-radius:8px; margin:10px 0;">
+
 </body>
 </html>
