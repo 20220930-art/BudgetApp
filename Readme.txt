@@ -19,6 +19,13 @@ TA: Basma Mukhtar Hussain
 server/
   index.js          - Express server, starts the app and connects routes
   models/
+    BaseModel.js    - Abstract base class with common CRUD operations
+    User.js         - User model (extends BaseModel)
+    Transaction.js  - Transaction model with budget alert (extends BaseModel)
+    Budget.js       - Budget model with spending queries (extends BaseModel)
+    Goal.js         - Goal model with contribution logic (extends BaseModel)
+    Category.js     - Category model (extends BaseModel)
+    Notification.js - Notification model with read tracking (extends BaseModel)
     db.js           - PostgreSQL connection pool using pg library
     schema.js       - Creates all database tables on first run
   routes/
@@ -38,8 +45,9 @@ public/
   js/app.js         - Alpine.js application logic and API calls
   css/app.css       - Custom styles
 
-docs/
-  index.html        - User guide documentation (how to use the app)
+docs/               - JSDoc generated API documentation (HTML)
+Presentation.html   - User guide / documentation (HTML)
+Presentation.pdf    - User guide / documentation (PDF)
 
 .env                - Environment variables (database URL, JWT secret)
 package.json        - Project dependencies and start script
@@ -57,4 +65,4 @@ https://github.com/20220930-art/BudgetApp
 - Bootstrap 5 (CSS framework)
 - bcryptjs (password hashing)
 - jsonwebtoken (JWT authentication)
-- Visual Studio Code (code editor)
+- JSDoc (API documentation generation)

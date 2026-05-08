@@ -13,5 +13,8 @@
     "pdfkit": "^0.18.0",
     "pg": "^8.20.0",
     "plantuml-encoder": "^1.4.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.5"
   }
 }

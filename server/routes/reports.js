@@ -1,10 +1,17 @@
 const express = require('express');
-const db = require('../models/db');
 const authMiddleware = require('../middleware/auth');
+const BaseModel = require('../models/BaseModel');
 
 const router = express.Router();
 router.use(authMiddleware);
 
+/**
+ * GET /api/reports
+ * Generate income/expense report with category and monthly breakdowns.
+ * @query {string} [from] - Start date (YYYY-MM-DD)
+ * @query {string} [to] - End date (YYYY-MM-DD)
+ * @returns {Object} Report with totals, category breakdown, monthly data, and insights
+ */
 router.get('/', async (req, res) => {
   const { from, to } = req.query;
   try {
@@ -12,16 +19,16 @@ router.get('/', async (req, res) => {
       ? `AND date BETWEEN '${from}' AND '${to}'`
       : '';
 
-    const incomeResult = await db.query(
+    const incomeResult = await BaseModel.query(
       `SELECT COALESCE(SUM(amount), 0) as total FROM transactions WHERE user_id = $1 AND type = 'income' ${dateFilter}`,
       [req.userId]
     );
-    const expenseResult = await db.query(
+    const expenseResult = await BaseModel.query(
       `SELECT COALESCE(SUM(amount), 0) as total FROM transactions WHERE user_id = $1 AND type = 'expense' ${dateFilter}`,
       [req.userId]
     );
 
-    const byCategory = await db.query(
+    const byCategory = await BaseModel.query(
       `SELECT c.name as category_name, c.type, COALESCE(SUM(t.amount), 0) as total
        FROM transactions t
        JOIN categories c ON t.category_id = c.id
@@ -31,7 +38,7 @@ router.get('/', async (req, res) => {
       [req.userId]
     );
 
-    const byMonth = await db.query(
+    const byMonth = await BaseModel.query(
       `SELECT TO_CHAR(date, 'YYYY-MM') as month, type, COALESCE(SUM(amount), 0) as total
        FROM transactions
        WHERE user_id = $1 ${dateFilter}
