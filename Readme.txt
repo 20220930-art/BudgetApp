@@ -6,7 +6,7 @@ TA: Basma Mukhtar Hussain
 
 === HOW TO RUN ===
 
-1. Install Node.js (v18+) and PostgreSQL (v15+)
+1. Install Node.js and PostgreSQL
 2. Create a database called "budgetapp"
 3. Edit .env file with your database connection string
 4. Open terminal in this folder
